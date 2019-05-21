@@ -1,4 +1,4 @@
-package main
+package learn
 
 import "fmt"
 
@@ -10,7 +10,7 @@ func gcd(x, y int) int {
 	}
 }
 
-func main() {
+func Main0001() {
 	fmt.Println(gcd(10, 5))
 	fmt.Println(gcd(5, 10))
 	fmt.Println(gcd(99, 3))

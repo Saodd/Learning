@@ -1,4 +1,4 @@
-package main
+package learn
 
 import (
 	"fmt"
@@ -53,7 +53,7 @@ func (self *UF) count() int {
 				connected = true
 			}
 		}
-		if ! connected {
+		if !connected {
 			sum++
 			set = append(set, cache)
 		}
@@ -61,9 +61,9 @@ func (self *UF) count() int {
 	return sum
 }
 
-func main() {
+func Main0002() {
 	uf := &UF{[]int{0, 1, 2, 3, 4, 5, 6, 7, 8}}
-	mapping := [][]int{{0, 3}, {3, 4}, {4, 7}, {7,8},{5, 8}}
+	mapping := [][]int{{0, 3}, {3, 4}, {4, 7}, {7, 8}, {5, 8}}
 	for _, m := range mapping {
 		uf.union(m[0], m[1])
 	}
@@ -73,11 +73,11 @@ func main() {
 	//for _,v := range uf.nodes {
 	//	fmt.Println(v)
 	//}
-	fmt.Print("group num: ",uf.count())
+	fmt.Print("group num: ", uf.count())
 }
 
 /*
 小结：
 花了2个小时左右，然后在回家的路上顿悟了这个最优解。
 但不可否认的是，在开始构建的时候受到书的启发，把核心逻辑分为find()和union()两部分，这让我事半功倍。
- */
+*/
