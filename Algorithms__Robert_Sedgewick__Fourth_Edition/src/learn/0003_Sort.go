@@ -16,7 +16,7 @@ func is_Sorted(li []int) bool {
 }
 
 // 选择排序算法,10万个int用时：5.4108552s,5.3938423s,5.4068515s
-// 20万个int用时:21.5873776s,21.6013872s
+// 20万个int用时:21.5873776s,21.6013872s,内存总共2.6M
 func sort_Select(li []int) {
 	minindex := 0 // 健壮性先不考虑
 	length := len(li)
