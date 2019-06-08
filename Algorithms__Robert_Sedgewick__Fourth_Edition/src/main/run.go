@@ -1,8 +1,6 @@
 package main
 
-import (
-	"learn"
-)
+import "learn"
 
 func main() {
 	learn.Main0003()
