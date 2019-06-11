@@ -1,7 +1,6 @@
 package learnTour
 
 import (
-	"fmt"
 	"golang.org/x/tour/tree"
 )
 
@@ -40,13 +39,57 @@ func main() {
 */
 
 // Walk 步进 tree t 将所有的值从 tree 发送到 channel ch。
-//func Walk(t *Tree, ch chan int)
+func Walk(t *tree.Tree, ch chan int) {
+	if t.Left != nil {
+		Walk2(t.Left, ch)
+	}
+	ch <- t.Value
+	if t.Right != nil {
+		Walk2(t.Right, ch)
+	}
+	close(ch)
+}
+func Walk2(t *tree.Tree, ch chan int) {
+	if t.Left != nil {
+		Walk2(t.Left, ch)
+	}
+	ch <- t.Value
+	if t.Right != nil {
+		Walk2(t.Right, ch)
+	}
+}
 
 // Same 检测树 t1 和 t2 是否含有相同的值。
-//func Same(t1, t2 *Tree) bool
+func Same(t1, t2 *tree.Tree) bool {
+	ch1, ch2 := make(chan int), make(chan int)
+	go Walk(t1, ch1)
+	go Walk(t2, ch2)
+	//var v1, v2 int
+	//var ok2 bool
+	for v1 := range ch1 {
+		v2, ok2 := <-ch2
+		println(v1, v2)
+		if !ok2 {
+			//defer close(ch1)
+			return false
+		}
+		if v1 != v2 {
+			//defer close(ch1) 不关闭了，让GC自动回收吧
+			//defer close(ch2)
+			return false
+		}
+	}
+	return true
+}
 
-func Main0012() {
-	fmt.Println(tree.New(1))
+func Main0012() bool {
+	t1, t2 := tree.New(1), tree.New(1)
+	println(t1.String())
+	println(t2.String())
+	r := Same(t1, t2)
+	println("Compare result: ", r)
+	return r
+
 }
 
 //妈呀不懂二叉树，先暂停一下，先去学算法。
