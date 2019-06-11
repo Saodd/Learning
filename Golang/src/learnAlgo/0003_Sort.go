@@ -1,9 +1,9 @@
-package learn
+package learnAlgo
 
 import (
 	"fmt"
-	"learn/p004_structure"
-	"mytools"
+	"learnAlgo/p004_structure"
+	"learnAlgo/tools"
 	"time"
 )
 
@@ -166,7 +166,7 @@ func (self sort_Quick_Book_Insert) insert(li []int, lo, hi int) {
 
 // 对比运行 ---------------------------------------------------------------
 func Main0003() {
-	data := mytools.Gen_ints_list(2000000)
+	data := tools.Gen_ints_list(2000000)
 	data2 := make([]int, len(data))
 	starttime := time.Now()
 	t := time.Microsecond

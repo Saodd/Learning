@@ -1,4 +1,4 @@
-package main
+package learnTour
 
 import (
 	"fmt"
@@ -31,7 +31,7 @@ func (self MyReader) Read(x []byte) (int, error) {
 	return len(x), nil
 }
 
-func main() {
+func Main0009() {
 	Validate(MyReader{})
 }
 

@@ -1,4 +1,4 @@
-package main
+package learnTour
 
 //import "golang.org/x/tools/go/ssa/interp/testdata/src/fmt"
 
@@ -34,7 +34,7 @@ func (self IPAddr) String() string {
 	return fmt.Sprintf("%d.%d.%d.%d", self[0], self[1], self[2], self[3])
 }
 
-func main() {
+func Main0006() {
 	hosts := map[string]IPAddr{
 		"loopback":  {127, 0, 0, 1},
 		"googleDNS": {8, 8, 8, 8},

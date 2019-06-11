@@ -1,4 +1,4 @@
-package main
+package learnTour
 
 /*
 让我们用函数做些好玩的事情。
@@ -21,7 +21,7 @@ func fibonacci() func() int {
 
 }
 
-func main() {
+func Main0005() {
 	f := fibonacci()
 	for i := 0; i < 10; i++ {
 		fmt.Println(f())

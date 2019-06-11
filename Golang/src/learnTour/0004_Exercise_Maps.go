@@ -1,4 +1,4 @@
-package main
+package learnTour
 
 /*
 实现 WordCount。它应当返回一个映射，其中包含字符串 s 中每个“单词”的个数。
@@ -53,7 +53,7 @@ var testCases = []struct {
 	}},
 }
 
-func main() {
+func Main0004() {
 	Test(WordCount)
 	//fmt.Printf("Fields are: %q", strings.Fields("  foo bar  baz   "))
 	//WordCount("ha haa ha")

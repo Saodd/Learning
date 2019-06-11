@@ -1,7 +1,7 @@
-package main
+package learnTour
 
 import "fmt"
 
-func main() {
+func Main0001() {
 	fmt.Print("Hello, world!")
 }

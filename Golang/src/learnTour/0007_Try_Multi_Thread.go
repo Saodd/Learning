@@ -1,4 +1,4 @@
-package main
+package learnTour
 
 import (
 	"fmt"
@@ -16,7 +16,7 @@ func run(pool, out chan int) {
 
 }
 
-func main() {
+func Main0007() {
 	pool := make(chan int, 1000)
 	out := make(chan int, 10)
 	for i := 0; i < 1000; i++ {

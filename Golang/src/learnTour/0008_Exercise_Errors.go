@@ -1,4 +1,4 @@
-package main
+package learnTour
 
 /*
 从之前的练习中复制 Sqrt 函数，修改它使其返回 error 值。
@@ -61,7 +61,7 @@ func Sqrt(x float64) (float64, error) {
 	}
 }
 
-func main() {
+func Main0008() {
 	fmt.Println(Sqrt(2))
 	fmt.Println(Sqrt(-2))
 }

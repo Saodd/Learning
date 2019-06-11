@@ -1,4 +1,4 @@
-package main
+package learnTour
 
 import (
 	"bytes"
@@ -9,7 +9,7 @@ import (
 	"image/png"
 )
 
-func Show(f func(int, int) [][]uint8) {
+func Show2(f func(int, int) [][]uint8) {
 	const (
 		dx = 256
 		dy = 256
@@ -26,10 +26,10 @@ func Show(f func(int, int) [][]uint8) {
 			m.Pix[i+3] = 255
 		}
 	}
-	ShowImage(m)
+	ShowImage2(m)
 }
 
-func ShowImage(m image.Image) {
+func ShowImage2(m image.Image) {
 	var buf bytes.Buffer
 	err := png.Encode(&buf, m)
 	if err != nil {
@@ -76,7 +76,7 @@ func (self *Image) At(x, y int) color.Color {
 	return color.RGBA{self.data[y][x], self.data[y][x], 255, 255}
 }
 func (self *Image) Generate() { // 要修改原来的对象(struct)，就必须要*传入指针
-	self.dx, self.dy = 256,256
+	self.dx, self.dy = 256, 256
 	z := make([][]uint8, self.dy)
 	for y := range z {
 		z[y] = make([]uint8, self.dx)
@@ -90,10 +90,10 @@ func (self *Image) Generate() { // 要修改原来的对象(struct)，就必须�
 	self.data = z
 }
 
-func main() {
-	m := &Image{}  // 这里也必须要&取指针，否则后面没法运行
+func Main0011() {
+	m := &Image{} // 这里也必须要&取指针，否则后面没法运行
 	m.Generate()
-	ShowImage(m)
+	ShowImage2(m)
 }
 
 /*
@@ -101,4 +101,4 @@ func main() {
 一开始觉得教程上的提示也太少了吧，不过写着写着还是明朗了。
 关键是明确目标函数ShowImage(m image.Image)，然后去找image.Image这个接口，然后逐个实现就好。
 #论IDE的重要性#
- */
+*/

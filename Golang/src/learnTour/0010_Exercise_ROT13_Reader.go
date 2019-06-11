@@ -1,4 +1,4 @@
-package main
+package learnTour
 
 import (
 	"io"
@@ -68,7 +68,7 @@ func (self rot13Reader) Read(x []byte) (int, error) {
 	//return self.r.Read(x)
 }
 
-func main() {
+func Main0010() {
 	s := strings.NewReader("Lbh penpxrq gur pbqr!")
 	r := rot13Reader{s}
 	io.Copy(os.Stdout, &r)

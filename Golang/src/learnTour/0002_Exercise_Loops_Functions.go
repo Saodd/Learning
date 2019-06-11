@@ -1,4 +1,4 @@
-package main
+package learnTour
 
 import "fmt"
 import "math"
@@ -35,7 +35,7 @@ func mysqrt2(x float64) (z float64) {
 	return z
 }
 
-func main() {
+func Main0002() {
 	x := 564684685136543841.0
 	fmt.Println("The Standard Answer is:", math.Sqrt(x))
 	fmt.Println(mysqrt(x))

@@ -1,4 +1,4 @@
-package main
+package learnTour
 
 import (
 	"fmt"
@@ -37,7 +37,7 @@ func Same(t1, t2 *tree.Tree) bool
 func main() {
 }
 -------------------------------------------------------------------
- */
+*/
 
 // Walk 步进 tree t 将所有的值从 tree 发送到 channel ch。
 //func Walk(t *Tree, ch chan int)
@@ -45,7 +45,8 @@ func main() {
 // Same 检测树 t1 和 t2 是否含有相同的值。
 //func Same(t1, t2 *Tree) bool
 
-func main() {
+func Main0012() {
 	fmt.Println(tree.New(1))
 }
+
 //妈呀不懂二叉树，先暂停一下，先去学算法。

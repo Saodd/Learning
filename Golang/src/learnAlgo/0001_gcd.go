@@ -1,4 +1,4 @@
-package learn
+package learnAlgo
 
 import "fmt"
 

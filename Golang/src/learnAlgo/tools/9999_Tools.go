@@ -1,4 +1,4 @@
-package mytools
+package tools
 
 import (
 	"bufio"

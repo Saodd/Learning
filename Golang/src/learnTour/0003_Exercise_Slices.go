@@ -20,7 +20,7 @@ func main() {
 
 */
 
-package main
+package learnTour
 
 import (
 	"bytes"
@@ -73,7 +73,7 @@ func Pic(dx, dy int) [][]uint8 {
 	return z
 }
 
-func main() {
+func Main0003() {
 	//Pic(10, 10)
 	Show(Pic)
 }
