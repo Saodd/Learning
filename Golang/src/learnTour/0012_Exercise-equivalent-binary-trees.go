@@ -61,7 +61,7 @@ func Walk2(t *tree.Tree, ch chan int) {
 
 // Same 检测树 t1 和 t2 是否含有相同的值。
 func Same(t1, t2 *tree.Tree) bool {
-	ch1, ch2 := make(chan int), make(chan int)
+	ch1, ch2 := make(chan int, 1), make(chan int, 1)
 	go Walk(t1, ch1)
 	go Walk(t2, ch2)
 	//var v1, v2 int
