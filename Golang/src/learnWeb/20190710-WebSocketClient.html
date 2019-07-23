@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test WebSocket</title>
+</head>
+<body>
+
+<input id="input" type="text"/>
+<button onclick="send()">Send</button>
+<pre id="output"></pre>
+
+
+<script>
+    var input = document.getElementById("input");
+    var output = document.getElementById("output");
+    var wss = new WebSocket("ws://192.168.1.213:9999/echo");
+
+    wss.onopen = function (evt) {
+        output.innerHTML += "Status: Connected\n";
+    };
+
+    wss.onmessage = function (evt) {
+        output.innerHTML += "Server: " + evt.data + "\n";
+    };
+
+    wss.onclose = function (evt) {
+        output.innerHTML += "Connection closed.\n";
+    };
+
+    function send() {
+        wss.send(input.value);
+        input.value = "";
+    }
+</script>
+</body>
+</html>
