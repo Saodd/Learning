@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-func is_Sorted(li []int) bool { // 检测是否递增，即前面的数必须小于等于后面的
+func isSorted(li []int) bool { // 检测是否递增，即前面的数必须小于等于后面的
 	for i := 0; i < len(li)-1; i++ {
 		if li[i] > li[i+1] {
 			return false
@@ -37,53 +37,98 @@ func sort_Select(li []int) {
 }
 
 // 快速排序 ---------------------------------------------------------------
-// 20万个int用时：16ms, 15ms, 16ms, 单位是毫秒，比选择排序快1000倍……
-// 200万个int用时：167ms, 171ms, 168ms, 单位还是毫秒……
-// 2000万个int用时：1.94s, 1.94s, 1.94s
-// 2亿个int用时：21.99s, 22.02s, 内存1578M
-// 几乎是线性的时间复杂度。太强了！的确是把选择排序不可能完成的任务完成了。
-type sort_Quick struct {
+func QuickSortInt(li []int) {
+	quickSortInt(li, 0, len(li)-1)
 }
 
-func (self sort_Quick) sort(li []int) {
-	self._sort(li, 0, len(li)-1)
-}
-func (self sort_Quick) _sort(li []int, lo, hi int) {
-	if lo >= hi {
-		return
-	}
-	mid := self.partition(li, lo, hi)
-	self._sort(li, lo, mid-1)
-	self._sort(li, mid+1, hi)
-}
-func (self sort_Quick) partition(li []int, lo, hi int) int { // 自己琢磨的算法，想了2个小时
-	// mid和hi去循环
-	mid := lo
-	midv := li[lo]
-	for mid < hi {
-		for mid < hi { // 寻找左边更大的元素
-			if li[mid] > midv {
-				break
-			}
-			mid++
+func quickSortInt(li []int, lo, hi int) {
+	stack := quickSortStackInt{}
+	stack.Push(lo, hi)
+	for stack.Len() > 0 {
+		x, y, _ := stack.Pop()
+		mid := quickSortIntPartition(li, x, y)
+		if mid-x > 15 {
+			stack.Push(x, mid-1)
+		} else if mid-x > 1 {
+			quickSortIntSelectSort(li, x, mid-1)
 		}
-		for mid < hi { // 寻找右边更小的元素
-			if li[hi] < midv {
-				break
-			}
-			hi--
-		}
-		if mid < hi { // 没有相遇就交换二者
-			li[mid], li[hi] = li[hi], li[mid]
-		} else if li[mid] < li[lo] { // 相遇了那就再检查一下相遇的位置，找到更小的
-			li[mid], li[lo] = li[lo], li[mid]
-			lo = mid
-		} else { // 相遇了那就再检查一下相遇的位置，找到更小的
-			li[mid-1], li[lo] = li[lo], li[mid-1]
-			lo = mid - 1
+		if y-mid > 15 {
+			stack.Push(mid+1, y)
+		} else if y-mid > 1 {
+			quickSortIntSelectSort(li, mid+1, y)
 		}
 	}
-	return lo
+	//if hi-lo < 2 {    // 因为后面的python代码没有写选择排序，所以这里也不用选择排序
+	//	quickSortIntSelectSort(li, lo, hi)
+	//	return
+	//}
+	//mid := quickSortIntPartition(li, lo, hi)
+	////fmt.Println(mid, lo, hi)
+	//quickSortInt(li, lo, mid-1)
+	//quickSortInt(li, mid+1, hi)
+}
+
+func quickSortIntPartition(li []int, lo, hi int) (mid int) {
+	l, r := lo, hi
+	//li[lo], li[(lo+hi)/2] = li[(lo+hi)/2], li[lo]
+	midValue := li[lo]
+	for l < r {
+		for l <= hi { // 找大的
+			if li[l] > midValue {
+				break
+			}
+			l++
+		}
+		for r >= lo {
+			if li[r] <= midValue {
+				break
+			}
+			r--
+		}
+		if l < r {
+			li[l], li[r] = li[r], li[l]
+		} else {
+			break
+		}
+	}
+	li[lo], li[r] = li[r], li[lo]
+	return r
+}
+
+func quickSortIntSelectSort(li []int, lo, hi int) {
+	var min int
+	for ; lo < hi; lo++ {
+		min = lo
+		for i := lo + 1; i <= hi; i++ {
+			if li[i] < li[min] {
+				min = i
+			}
+		}
+		if lo != min {
+			li[lo], li[min] = li[min], li[lo]
+		}
+	}
+}
+
+type quickSortStackInt struct {
+	items []int
+}
+
+func (self *quickSortStackInt) Len() int {
+	return len(self.items)
+}
+
+func (self *quickSortStackInt) Push(x, y int) {
+	self.items = append(self.items, x, y)
+}
+func (self *quickSortStackInt) Pop() (int, int, error) {
+	l := len(self.items)
+	//if l < 2 {
+	//	return 0, 0, errors.New("没有元素可以取出")
+	//}
+	x, y := self.items[l-2], self.items[l-1]
+	self.items = self.items[:l-2]
+	return x, y, nil
 }
 
 // 书上的算法，只有partition不同
@@ -174,43 +219,43 @@ func Main0003() {
 	//for i := range data {
 	//	data2[i] = data[i]
 	//}
-	//fmt.Println("Checking input for Quick-sort:", is_Sorted(data2))
+	//fmt.Println("Checking input for Quick-sort:", isSorted(data2))
 	//starttime = time.Now()
 	//sort_Quick{}.sort(data2)
 	//t = time.Since(starttime)
-	//fmt.Printf("Quick-sort: %v,   used time: %v seconds.\n", is_Sorted(data2), t)
+	//fmt.Printf("Quick-sort: %v,   used time: %v seconds.\n", isSorted(data2), t)
 	// ---------------------------
 	for i := range data {
 		data2[i] = data[i]
 	}
-	fmt.Println("Checking input for Quick-sort-Book:", is_Sorted(data2))
+	fmt.Println("Checking input for Quick-sort-Book:", isSorted(data2))
 	starttime = time.Now()
 	sort_Quick_Book{}.sort(data2)
 	t = time.Since(starttime)
-	fmt.Printf("Quick-sort-Book: %v,   used time: %v seconds.\n", is_Sorted(data2), t)
+	fmt.Printf("Quick-sort-Book: %v,   used time: %v seconds.\n", isSorted(data2), t)
 	// ---------------------------
 	//for i := range data{
 	//	data2[i] = data[i]
 	//}
-	//fmt.Println("Checking input for Select-sort:", is_Sorted(data2))
+	//fmt.Println("Checking input for Select-sort:", isSorted(data2))
 	//starttime = time.Now()
 	//sort_Select(data2)
 	//t = time.Since(starttime)
-	//fmt.Printf("Select-sort: %v,   used time: %v seconds.\n", is_Sorted(data2), t)
+	//fmt.Printf("Select-sort: %v,   used time: %v seconds.\n", isSorted(data2), t)
 	// ---------------------------
 	for i := range data {
 		data2[i] = data[i]
 	}
-	fmt.Println("Checking input for sort_Quick_Book_Insert(5):", is_Sorted(data2))
+	fmt.Println("Checking input for sort_Quick_Book_Insert(5):", isSorted(data2))
 	starttime = time.Now()
 	sort_Quick_Book_Insert{}.sort(data2)
 	t = time.Since(starttime)
-	fmt.Printf("sort_Quick_Book_Insert(5): %v,   used time: %v seconds.\n", is_Sorted(data2), t)
+	fmt.Printf("sort_Quick_Book_Insert(5): %v,   used time: %v seconds.\n", isSorted(data2), t)
 	// ---------------------------
 	for i := range data {
 		data2[i] = data[i]
 	}
-	fmt.Println("Checking input for PriorityQueue:", is_Sorted(data2))
+	fmt.Println("Checking input for PriorityQueue:", isSorted(data2))
 	starttime = time.Now()
 	q := &p004_structure.MyPriorityQueueInt{}
 	for i := range data2 {
@@ -220,13 +265,13 @@ func Main0003() {
 	for i := q.Length() - 1; i >= 0; i-- {
 		data2[i], _ = q.Pop()
 	}
-	fmt.Printf("PriorityQueue: %v,   used time: %v seconds.\n", is_Sorted(data2), t)
+	fmt.Printf("PriorityQueue: %v,   used time: %v seconds.\n", isSorted(data2), t)
 
 	// ---------------------------三叉堆是不能实现的
 	//for i := range data {
 	//	data2[i] = data[i]
 	//}
-	//fmt.Println("Checking input for PriorityQueue3:", is_Sorted(data2))
+	//fmt.Println("Checking input for PriorityQueue3:", isSorted(data2))
 	//
 	//starttime = time.Now()
 	//q3 := &p004_structure.MyPriorityQueue3Int{}
@@ -237,6 +282,6 @@ func Main0003() {
 	//for i := q3.Length()-1; i >=0; i-- {
 	//	data2[i], _ = q3.Pop()
 	//}
-	//fmt.Printf("PriorityQueue3: %v,   used time: %v seconds.\n", is_Sorted(data2), t)
+	//fmt.Printf("PriorityQueue3: %v,   used time: %v seconds.\n", isSorted(data2), t)
 
 }

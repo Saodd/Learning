@@ -2,7 +2,6 @@ package p004_structure
 
 import (
 	"errors"
-	"sync"
 )
 
 // 入门版 ------------------------------------------------------------
@@ -53,7 +52,7 @@ func (self *MyFixedStackInt) pop() (int, error) {
 
 type MyStackInt struct {
 	items []int
-	lock  sync.Mutex
+	//lock  sync.Mutex
 }
 
 func (self *MyStackInt) Len() int {
@@ -61,13 +60,13 @@ func (self *MyStackInt) Len() int {
 }
 
 func (self *MyStackInt) Push(obj int) {
-	self.lock.Lock()
-	defer self.lock.Unlock()
+	//self.lock.Lock()
+	//defer self.lock.Unlock()
 	self.items = append(self.items, obj) //append好像不会返回error??
 }
 func (self *MyStackInt) Pop() (int, error) {
-	self.lock.Lock()
-	defer self.lock.Unlock()
+	//self.lock.Lock()
+	//defer self.lock.Unlock()
 	if len(self.items) == 0 {
 		return 0, errors.New("没有元素可以取出")
 	}
@@ -75,3 +74,18 @@ func (self *MyStackInt) Pop() (int, error) {
 	self.items = self.items[:len(self.items)-1]
 	return obj, nil
 }
+
+// 泛型版 ------------------------------------------------------------
+//type MyStack struct {
+//	items []item
+//
+//}
+//
+//func te() item {
+//	return 1
+//}
+//
+//func b()  {
+//	c:= te()
+//	fmt.Println(c+1)
+//}

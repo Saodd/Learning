@@ -21,7 +21,7 @@ func generate_ints_file(path string, num int) {
 func Gen_ints_list(num int) []int {
 	data := make([]int, num)
 	for i := 0; i < num; i++ {
-		data[i] = rand.Int()
+		data[i] = rand.Intn(100)
 	}
 	return data
 }
