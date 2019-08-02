@@ -1,4 +1,4 @@
-package p0011
+package p001x
 
 func maxArea(height []int) int {
 	// 题目规定：参数数组长度最小为2
