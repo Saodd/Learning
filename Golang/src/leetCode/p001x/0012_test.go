@@ -60,9 +60,14 @@ func Test_intToRoman_Time(t *testing.T) {
 	start := time.Now()
 	for i := 0; i < loopNumber; i++ {
 		for p:=1; p<4000; p++{
-			intToRoman(p)
+			//intToRoman(p)
+			nothing(p)
 		}
 	}
 	totalTime = time.Since(start)
 	fmt.Println(totalTime.Seconds()/float64(loopNumber))
+}
+
+func nothing(p int)  {
+	p++
 }
