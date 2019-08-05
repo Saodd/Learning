@@ -38,6 +38,9 @@ func sort_Select(li []int) {
 
 // 快速排序 ---------------------------------------------------------------
 func QuickSortInt(li []int) {
+	if len(li)==0{
+		return
+	}
 	quickSortInt(li, 0, len(li)-1)
 }
 
@@ -58,14 +61,6 @@ func quickSortInt(li []int, lo, hi int) {
 			quickSortIntSelectSort(li, mid+1, y)
 		}
 	}
-	//if hi-lo < 2 {    // 因为后面的python代码没有写选择排序，所以这里也不用选择排序
-	//	quickSortIntSelectSort(li, lo, hi)
-	//	return
-	//}
-	//mid := quickSortIntPartition(li, lo, hi)
-	////fmt.Println(mid, lo, hi)
-	//quickSortInt(li, lo, mid-1)
-	//quickSortInt(li, mid+1, hi)
 }
 
 func quickSortIntPartition(li []int, lo, hi int) (mid int) {
