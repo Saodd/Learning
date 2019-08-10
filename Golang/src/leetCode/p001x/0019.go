@@ -1,9 +1,6 @@
 package p001x
 
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
+import . "leetCode/utils"
 
 func removeNthFromEnd(head *ListNode, n int) *ListNode {
 	// 题目规定“给定的 n 保证是有效的。”所以不对n进行检查了
@@ -28,26 +25,3 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 	return head
 }
 
-func SliceToChain(nums []int) *ListNode {
-	if len(nums) == 0 {
-		return nil
-	}
-	var head *ListNode = &ListNode{nums[0], nil}
-	for i, le, tail := 1, len(nums), head; i < le; i++ {
-		tail.Next = &ListNode{nums[i], nil}
-		tail = tail.Next
-	}
-	return head
-}
-
-func ChainToSlice(head *ListNode) []int {
-	if head == nil {
-		return []int{}
-	}
-	var nums []int = []int{}
-	for head != nil {
-		nums = append(nums, head.Val)
-		head = head.Next
-	}
-	return nums
-}

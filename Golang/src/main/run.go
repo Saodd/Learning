@@ -1,9 +1,20 @@
 package main
 
 import (
-	"leetCode/p0010_RegularExpression"
+    "fmt"
+    "leetCode/utils"
 )
 
 func main() {
-	p0010_RegularExpression.Main0010()
+
+    fmt.Printf("%p\n",mytry())
+}
+
+func mytry() *utils.ListNode {
+    head := &utils.ListNode{1, nil}
+    fmt.Printf("%p\n",head)
+    defer func() {head=head}()
+    head = &utils.ListNode{2, nil}
+    fmt.Printf("%p\n",head)
+    return head
 }
