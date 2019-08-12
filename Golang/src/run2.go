@@ -1,20 +1,27 @@
 package main
 
 import (
-	"learnAlgo"
-	"learnAlgo/tools"
-	"net/http"
-	_ "net/http/pprof"
-	"time"
+    "fmt"
+    "time"
 )
 
 func main() {
-	go func() {
-		time.Sleep(2 * time.Second)
-		li := tools.Gen_ints_list(2000000)
-		learnAlgo.QuickSortInt(li)
-	}()
-	//li := tools.Gen_ints_list(2000000)
-	//learnAlgo.QuickSortInt(li)
-	http.ListenAndServe("0.0.0.0:6060", nil)
+    var ch = make(chan string, 1)
+    go func() {
+        for i := range ch {
+            ch <- i
+        }
+    }()
+    time.Sleep(time.Second)
+
+    {
+        start := time.Now()
+        for i := 0; i < 1000000; i++ {
+            ch <- "1"
+            <- ch
+        }
+        totalTime := time.Since(start)
+        close(ch)
+        fmt.Println(float64(totalTime.Seconds()) / 1000000)
+    }
 }
