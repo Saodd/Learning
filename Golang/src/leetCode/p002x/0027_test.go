@@ -64,7 +64,7 @@ func Test_removeElement(t *testing.T) {
         t.Run(tt.name, func(t *testing.T) {
             got := removeElement(tt.args.nums, tt.args.val);
             if !reflect.DeepEqual(tt.args.nums[:got], tt.want.nums[:got]) || got != tt.want.length {
-                t.Errorf("removeDuplicates(%v, %v) = %v, want %v, %v", tests[i].args.nums,tt.args.val, got, tt.want.nums, tt.want.length)
+                t.Errorf("RemoveDuplicates(%v, %v) = %v, want %v, %v", tests[i].args.nums,tt.args.val, got, tt.want.nums, tt.want.length)
             }
         })
     }

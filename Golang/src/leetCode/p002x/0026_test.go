@@ -25,9 +25,9 @@ func Test_removeDuplicates(t *testing.T) {
     }
     for _, tt := range tests {
         t.Run(tt.name, func(t *testing.T) {
-            got := removeDuplicates(tt.args.nums);
+            got := RemoveDuplicates(tt.args.nums);
             if !reflect.DeepEqual(tt.args.nums[:got], tt.want.nums[:got]) || got != tt.want.num {
-                t.Errorf("removeDuplicates(%v) = %v, want %v, %v", tt.args.nums, got, tt.want.nums, tt.want.num)
+                t.Errorf("RemoveDuplicates(%v) = %v, want %v, %v", tt.args.nums, got, tt.want.nums, tt.want.num)
             }
         })
     }
